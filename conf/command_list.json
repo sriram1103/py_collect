@@ -1,0 +1,33 @@
+{
+    "GNU/Linux": {
+        "Generic": {
+            "Hostname" : "hostname",
+            "Date" : "date",
+            "OS": "uname -o"
+        },
+        "CPU": {
+            "No of CPU" : "lscpu | grep '^CPU(s)' | awk '{print $2}'",
+            "No of Cores" : "lscpu  | grep '^Core' | awk '{print $4}'",
+            "No of Threads" : "lscpu  | grep '^Thread' | awk '{print $4}'",
+            "Load Average" : "top -n 1  b | grep '%Cpu' | sed 's/.*://'"
+        },
+        "RAM":{
+            "Total": "grep MemTotal /proc/meminfo  | awk '{print $2,$2/1024,$2/1024/1024}'",
+            "Free": "grep MemFree /proc/meminfo  | awk '{print $2,$2/1024,$2/1024/1024}'",
+            "Available": "grep MemAvailable /proc/meminfo  | awk '{print $2,$2/1024,$2/1024/1024}'"
+        },
+        "Load" : {
+            "Load Average": "uptime| awk '{print  $(NF-2), $(NF-1), $(NF)}'"
+        },
+        "NW" : {
+            "Packet Drop/Error" : "netstat -i | awk '{if($4>0 || $5>0 || $8 >0|| $9>0) print $0}'"
+        },
+        "Process Status": {
+            "CPU Intense": "top -n 1 b -o %CPU| head -17 | tail -11",
+            "Memory Intese" : "top -n 1 b -o %MEM | head -17 | tail -11 "
+        },
+        "FS": {
+            "> 75 Usage": "df -kh | sed 's/%//'| awk -v fs=75 '$5 > fs {print $0}' "
+        }
+    }
+}

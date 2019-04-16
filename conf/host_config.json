@@ -1,0 +1,10 @@
+{
+    "generic" : {
+        "user_name" : "sriram",
+        "key_file" : "/home/sriram/.ssh/id_rsa"
+    },
+    "hosts" :{
+        "localhost" : {
+        }
+    }
+}
